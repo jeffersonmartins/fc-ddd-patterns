@@ -1,7 +1,7 @@
 import EventHandlerInterface from "../../../@shared/event/event-handler.interface";
 import CustomerChangeAddressEvent from "../customer-change-address.event";
 
-export default class EnviaConsoleWhenCustomerAddressChangeHandler
+export default class SendConsoleWhenCustomerAddressChangeHandler
     implements EventHandlerInterface<CustomerChangeAddressEvent>
 {
     handle(event: CustomerChangeAddressEvent) : void {
