@@ -39,6 +39,24 @@ describe("Customer domain events", () => {
         expect(eventDispatcher.getEventHandlers["CustomerCreatedEvent"].length).toBe(0);
     })
 
+    it("should unregister all event handlers", () => {
+        const eventDispatcher = new EventDispatcher();
+        const eventHandler1 = new SendConsoleLog1Handler();
+        const eventHandler2 = new SendConsoleLog2Handler();
+        
+        eventDispatcher.register("CustomerCreatedEvent", eventHandler1);
+        eventDispatcher.register("CustomerCreatedEvent", eventHandler2);
+
+        expect(eventDispatcher.getEventHandlers["CustomerCreatedEvent"][0]).toMatchObject(eventHandler1);
+        expect(eventDispatcher.getEventHandlers["CustomerCreatedEvent"][1]).toMatchObject(eventHandler2);
+
+        eventDispatcher.unregisterAll();
+
+        expect(eventDispatcher.getEventHandlers["CustomerCreatedEvent"]).toBeUndefined();
+    
+    });
+
+
     it("should notify all event handlers", () => {
         const eventDispatcher = new EventDispatcher();
         const eventHandler1 = new SendConsoleLog1Handler();
